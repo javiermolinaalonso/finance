@@ -29,50 +29,12 @@ public abstract class SimulatorVolatilityTest extends DBTestCase {
 
 	protected Connection conn;
 	
-	@BeforeClass
-	public void createDatabase() throws SQLException, ClassNotFoundException{
-		// Load the HSQL Database Engine JDBC driver
-        // hsqldb.jar should be in the class path or made part of the current jar
-        Class.forName("org.hsqldb.jdbcDriver");
-
-        // connect to the database.   This will load the db files and start the
-        // database if it is not alread running.
-        // db_file_name_prefix is used to open or create files that hold the state
-        // of the db.
-        // It can contain directory names relative to the
-        // current working directory
-        conn = DriverManager.getConnection("jdbc:hsqldb:sample",
-                                           "sa",                     // username
-                                           "");                      // password
-        
-        Statement st = conn.createStatement();
-        st.execute("Create table Value");
-	}
-	
-	
 	@Before
 	public void setUp() throws Exception{
-		// Load the HSQL Database Engine JDBC driver
-        // hsqldb.jar should be in the class path or made part of the current jar
-        Class.forName("org.hsqldb.jdbcDriver");
-
-        // connect to the database.   This will load the db files and start the
-        // database if it is not alread running.
-        // db_file_name_prefix is used to open or create files that hold the state
-        // of the db.
-        // It can contain directory names relative to the
-        // current working directory
-        conn = DriverManager.getConnection("jdbc:hsqldb:sample",
-                                           "sa",                     // username
-                                           "");                      // password
-        
-        Statement st = conn.createStatement();
-        st.executeUpdate("Drop table if exists Value");
-        st.executeUpdate("Create table Value(DAY DATE, CURRENT DOUBLE, PREVIOUS DOUBLE, DIVIDEND DOUBLE )");
-		System.setProperty( PropertiesBasedJdbcDatabaseTester.DBUNIT_DRIVER_CLASS, "org.hsqldb.jdbcDriver" );
-        System.setProperty( PropertiesBasedJdbcDatabaseTester.DBUNIT_CONNECTION_URL, "jdbc:hsqldb:sample" );
-        System.setProperty( PropertiesBasedJdbcDatabaseTester.DBUNIT_USERNAME, "sa" );
-        System.setProperty( PropertiesBasedJdbcDatabaseTester.DBUNIT_PASSWORD, "" );
+		System.setProperty( PropertiesBasedJdbcDatabaseTester.DBUNIT_DRIVER_CLASS, "org.postgresql.Driver" );
+        System.setProperty( PropertiesBasedJdbcDatabaseTester.DBUNIT_CONNECTION_URL, "jdbc:postgresql://localhost:5432/finance" );
+        System.setProperty( PropertiesBasedJdbcDatabaseTester.DBUNIT_USERNAME, "phoboss" );
+        System.setProperty( PropertiesBasedJdbcDatabaseTester.DBUNIT_PASSWORD, "phubituzz" );
         super.setUp();
 	}
 	
